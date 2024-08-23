@@ -1,0 +1,569 @@
+//====================================================================================================
+.header {
+	&__top {
+	}
+	&__body {
+	}
+}
+
+.top-header {
+	padding: 10px 0;
+	color: #fff;
+	background-color: $mainDarkColor;
+	&__container {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		min-height: rem(50);
+		@media (max-width: $tablet) {
+			gap: 10px;
+		}
+		@media (max-width:$mobile){
+			gap: 5px;
+		}
+	}
+	&__menu {
+		flex: 1 1 auto;
+	}
+	&__user-container {
+		display: flex;
+		justify-content: space-between;
+	}
+	.menu {
+		padding-top: rem(5);
+		flex-grow: 1;
+	}
+	&__user {
+		display: flex;
+		max-width: rem(200);
+		justify-content: space-between;
+		font-weight: 600;
+		line-height: math.div(22, 18);
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	&__user-item {
+		min-height: rem(28);
+		margin-right: em(15, 28);
+	}
+	&__user-text {
+		padding-top: rem(4);
+		@media (max-width:$tablet){
+			display: none; 
+		}
+	}
+}
+
+.menu-top-header {
+	&__list {
+		display: flex;
+		row-gap: 5px;
+		@include adaptiveValue("column-gap", 60, 20);
+		@media (max-width: $tablet) {
+			flex-direction: column;
+			row-gap: 10px;
+		}
+	}
+	&__item {
+		&_catalog {
+			@media (min-width: $tablet) {
+				display: none;
+			}
+			img {
+				@include adaptiveValue("height", 30, 18);
+			}
+		}
+	}
+	&__link {
+		font-size: rem(16);
+		line-height: math.div(20, 16);
+		//правила хорошего тона - добавлять hover, даже если нет в макете
+		//данные hover будут применяться только для устройств с мышью
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		&_catalog{
+			display: flex;
+			width: rem(290);
+			justify-content: space-between;
+		}
+	}
+	@media (max-width: $tablet) {
+		display: none;
+	}
+}
+
+.menu {
+	@media (max-width: $tablet) {
+		display: flex;
+		flex: 1 1 auto;
+		justify-content: flex-end;
+		//position: absolute;
+		//right: rem(45);
+	}
+	
+	&__body {
+		@media (max-width: $tablet) {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			overflow: auto;
+			background-color: $mainDarkColor;
+			padding: rem(80) rem(15) rem(50) rem(15);
+			z-index: 4;
+		}
+		display: none;
+		// Добавьте остальные стили для вашего меню
+
+		&._active {
+			display: block;
+			// Стили для отображения меню
+		}
+	}
+}
+
+.body-header {
+	padding: rem(10) 0;
+	background-color: #ecf1f2;
+	&__container {
+		display: flex;
+		min-height: rem(70);
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__logo {
+		max-width: rem(190);
+		max-height: rem(42);
+	}
+	&__search {		
+		padding-right: rem(20);
+		//подключаем миксин (av+tab) с отступами при адаптиве
+		//отступ от логотипа zlatmax до поиска изменится от 158 до 20 в промежутке ширины ограничивающего контейнера от 1620 до 1400
+		//Этот параметр keepSize указывает, будет ли свойство сохранять своё значение после достижения минимальной ширины контейнера.
+		@include adaptiveValue("padding-left", 158, 20, 1620, 1250, 1);
+		@media (max-width:$tablet){
+			padding-right: 0;
+			flex-grow: 1;
+			max-width: 100%;
+		}
+	}
+	&__wrap {
+		display: flex;
+		//width: rem(725);
+		justify-content: space-between;
+		@media (max-width:$tablet){
+			flex: 1 1 auto;
+		}
+	}
+}
+
+.search-header {
+	background-color: rgba(7, 7, 7, 0.03);
+	position: relative;
+	@media (max-width:$tablet){
+		width: 100%; /* позволяет инпуту поиска занимать всю ширину блока */
+		max-width: none;
+	}
+	&__button {
+		position: absolute;
+		background-image: url("../img/icons/search.svg");
+		background-size: rem(12) rem(12);
+		background-position: rem(20) 50%;
+		background-repeat: no-repeat;
+		background-color: transparent;
+		height: rem(41);
+		width: rem(41);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		left: rem(8);
+		font-size: rem(14);
+		color: rgba(0, 0, 0, 0.5);
+	}
+	&__input {
+		background-color: transparent;
+		border-radius: rem(3);
+		border: 1px solid rgba(4, 4, 4, 0.5);
+		min-height: rem(41);
+		width: 100%;
+		color: $mainColor;
+		padding: 0 rem(20) 0 rem(50);
+		&::placeholder {
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
+.actions-header {
+	display: flex;
+	align-items: center;
+	@media (max-width:$tablet){
+		display: none;
+	}
+	@include adaptiveValue("column-gap", 30, 15, 1620, 1200, 1);
+	&__location {
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		min-width: rem(100);
+		margin-right: rem(55);
+		@include adaptiveValue("margin-right", 25, 0, 1620, 1000, 1);
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+	&__location-item {
+	}
+	&__location-text {
+		font-weight: 600;
+		font-size: rem(18);
+	}
+	&__heart {
+		margin-right: rem(32);
+		@media (max-width: $tablet) {
+			filter: brightness(0) invert(1);
+		}
+	}
+}
+
+.phones-header {
+	&__items {
+		position: relative; // Добавлено
+	}
+	&__item {
+		position: relative;
+		display: flex;
+	}
+	&__phone {
+		margin-right: rem(17);
+		font-weight: 600;
+		line-height: math.div(22, 18);
+		white-space: nowrap;
+		@media (max-width:$tablet){
+			font-size: rem(20);
+		}
+	}
+	&__icon {
+		margin-right: rem(30);
+		@media (max-width:$tablet){
+			display: none;
+		}
+	}
+	&__arrow {
+		// переворачиваем стрелку, когда открыто выпадающее меню
+		&._spoller-active {
+			.phones-header__icon {
+				transform: rotate(-180deg);
+				transition: transform 0.3s ease;
+			}
+		}
+	}
+	&__list {
+		position: absolute;
+		top: 100%;
+		width: 85%;
+		left: 0;
+		background-color: #fff;
+		border-radius: rem(10);
+		padding: rem(15);
+		margin-top: rem(5);
+		@media (max-width: $tablet) {
+			color: #000;
+		}
+		//тени
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		z-index: 2;
+		li {
+			// задаем отступы снизу всем элементам, кроме последнего
+			&:not(:last-child) {
+				margin-bottom: em(8, 18);
+			}
+		}
+		@media (max-width:$tablet){
+			display: none;
+		}
+	}
+	&__callback {
+		margin-top: rem(3);
+		font-weight: 700;
+		line-height: math.div(22, 18);
+		color: $mainOrangeColor;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		@media (max-width:$tablet){
+			display: none;
+		}
+	}
+}
+
+.cart-header {
+	&__icon {
+		display: flex;
+		margin-right: rem(20);
+		position: relative;
+		gap: rem(15);
+		img {
+			@media (max-width: $tablet) {
+				filter: brightness(0) invert(1);
+			}
+		}
+		span {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: rem(14);
+			height: rem(14);
+			right: 150px;
+			border-radius: 50%;
+			color: #fff;
+			background-color: $mainOrangeColor;
+			font-size: rem(8);
+			@media (max-width: 1250px) {
+				right: -5px;
+				top: -5px;
+			}
+		}
+	}
+	&__body {
+		display: flex;
+		font-size: rem(16);
+		line-height: math.div(20, 16);
+		flex-direction: column;
+		//убираем при достижении ширины экрана
+		@media (max-width: em(1250)) {
+			display: none;
+		}
+	}
+	&__summ {
+		font-weight: 500;
+		margin-bottom: em(5, 16);
+	}
+	&__link {
+		font-weight: 600;
+		color: $mainOrangeColor;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+//========================================================================================================================================================
+.catalog-header {
+	background-color: $mainDarkColor;
+	color: #fff;
+	position: relative;
+	z-index: 1;
+	&__container {
+	}
+	&__menu {
+	}
+}
+
+.menu-catalog {
+	&__list {
+		display: flex;
+		gap: 10px;
+		//делаем не как в макете, а по всей ширине
+		justify-content: space-between;
+	}
+	&__item {
+	}
+	&__link {
+		//делаем большую площадь нажатия у ссылки для удобства
+		min-height: rem(70);
+		padding: 0 rem(10);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		//дальше по пути такого позиционирования ни у кого быть не должно
+		position: relative;
+		transition: color 0.3s ease 0s;
+		//желтая линия
+		&::after {
+			content: "";
+			position: absolute;
+			opacity: 0;
+			//скроем, так как полоску добавляем только к активному элементу
+			visibility: hidden;
+			bottom: 0;
+			left: rem(10);
+			height: 1px;
+			background-color: $mainOrangeColor;
+			width: calc(100% - rem(20));
+			transition: all 0.3s ease 0s;
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				color: $mainOrangeColor;
+				&::after {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+		//при получении класса sub-menu-active
+		&._sub-menu-active {
+			color: $mainOrangeColor;
+			&::after {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+	//выпадающее подменю
+	&__sub-menu {
+		//Установив ширину подменю в 100% и привязав его левый и верхний края к родителю, можно создать аккуратное и структурированное меню.
+		width: 100%;
+		left: 0;
+		//100% высоты родительского элемента будут использованы для позиционирования верхней границы подменю.
+		top: 100%;
+		background-color: $mainDarkColor;
+	}
+}
+.sub-menu-catalog {
+	&__container {
+		padding: 0px rem(10);
+	}
+	&__block {
+		display: none;
+		//Эта конструкция @for создаёт цикл в Sass, который повторяется от 1 до 5 (6 не включительно).
+		//Переменная $var принимает значения от 1 до 5 последовательно.
+		//Вместо того чтобы вручную писать правила для каждого количества столбцов, цикл @for делает это автоматически.
+		@for $var from 1 to 6 {
+			//Здесь используется интерполяция для создания селекторов на основе текущего значения переменной $var.
+			//Символ & ссылается на родительский селектор. Например, если родительский селектор - это .container,
+			// то на первой итерации (когда $var равно 1) будет создан селектор .container_1, на второй итерации .container_2 и так далее
+			&_#{$var} {
+				// нужно создать необходимое количество колонок, каждой из которых зададим minmax, чтобы они не расширялись.
+				grid-template-columns: repeat($var, minmax(auto, rem(320)));
+			}
+		}
+		&._sub-menu-open {
+			display: grid;
+		}
+	}
+	padding: 0;
+	&__category {
+		font-size: rem(16);
+		line-height: math.div(20, 16);
+		font-weight: 700;
+		//чтобы увеличить область нажатия и сделать отступы для каждого объекта
+		//учтем отступ безопасности
+		padding: rem(30) rem(15) rem(30) 0;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+	}
+	&__list {
+		//чтобы кнопка "смотреть все" была внизу
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: rem(30) rem(15) rem(30) 0;
+		border-top: 1px solid rgba(255, 255, 255, 0.3);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	}
+	&__item {
+	}
+	&__link {
+		font-size: rem(16);
+		line-height: math.div(20, 16);
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+	}
+	&__footer {
+		padding: rem(30) rem(15) rem(30) 0;
+	}
+	&__all {
+		//уберем расширение по умолчанию для flex элемента, чтобы область нажатия не выходила за кнопку
+		font-size: rem(16);
+		color: $mainOrangeColor;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+//====================================================================================================
+
+// Burger
+// По умолчанию скрыт и показывается только на мобильных
+.icon-menu {
+	display: block;
+	margin-left: auto;
+	@media (max-width: $tablet) {
+		display: block;
+		position: relative;
+		width: 30px;
+		height: 18px;
+		cursor: pointer;
+		z-index: 5;
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			position: absolute;
+			width: 100%;
+			height: 2px; // убрал функцию rem() для совместимости
+			background-color: #fff;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		span {
+			top: calc(50% - 1px); // убрал функцию rem() для совместимости
+		}
+
+		&._active {
+			&::before {
+				transform: rotate(45deg);
+				top: calc(50% - 1px); // убрал функцию rem() для совместимости
+			}
+
+			&::after {
+				transform: rotate(-45deg);
+				bottom: calc(50% - 1px); // убрал функцию rem() для совместимости
+			}
+
+			span {
+				transform: scale(0);
+			}
+		}
+	}
+}
